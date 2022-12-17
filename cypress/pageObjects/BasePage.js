@@ -46,5 +46,9 @@ export class BasePage {
     static clickOnTex(text){
         cy.contains(text).click({force: false})
     }
+
+    static type(selector,message){
+        cy.get(selector).type(message)
+    }
 }
 

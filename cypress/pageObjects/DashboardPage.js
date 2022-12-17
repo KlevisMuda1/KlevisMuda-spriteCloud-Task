@@ -1,6 +1,7 @@
 import { BasePage } from "./BasePage";
 
 const CONNECT_WALLET_BUTTON = "[data-cy='connect-wallet-button']"
+const WRAP_FIELD = "[data-cy='wrap-input']"
 
 
 export class DashboardPage extends BasePage {
@@ -21,5 +22,8 @@ export class DashboardPage extends BasePage {
         this.verifyText(message)
     }
 
+    static enterAmountToWrap(amount){
+        this.type(WRAP_FIELD, amount)
+    }
 
 }
