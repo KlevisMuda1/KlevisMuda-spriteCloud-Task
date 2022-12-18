@@ -1,2 +1,5 @@
 node_modules
 .idea
+cypress/task
+cypress/screenshots
+cypress/videos
