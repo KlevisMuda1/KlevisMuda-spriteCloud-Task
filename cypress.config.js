@@ -7,8 +7,8 @@ module.exports = defineConfig({
     viewportHeight: 1080,
     reporter: "mochawesome",
     reporterOptions: {
-      reportDir: "cypress/results",
-      html: false,
+      reportDir: "cypress/task",
+      html: true,
       overwrite: false
     },
     setupNodeEvents(on, config) {

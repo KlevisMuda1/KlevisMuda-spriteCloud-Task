@@ -3,3 +3,4 @@ node_modules
 cypress/task
 cypress/screenshots
 cypress/videos
+cypress/results
