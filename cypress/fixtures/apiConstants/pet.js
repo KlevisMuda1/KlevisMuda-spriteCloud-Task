@@ -1,10 +1,12 @@
-{
-  "id": 111,
+let petID = Math.floor((Math.random() * 100) + 1);
+
+export const dog = {
+  "id": petID,
   "category": {
     "id": 0,
-    "name": "Lesii"
+    "name": "German Shepherd"
   },
-  "name": "doggie",
+  "name": "Lesi",
   "photoUrls": [
     "new url"
   ],
@@ -14,5 +16,5 @@
       "name": "boss"
     }
   ],
-  "status": "single :)"
+  "status": "available"
 }

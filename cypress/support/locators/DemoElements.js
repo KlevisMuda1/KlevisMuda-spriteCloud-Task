@@ -1,9 +1,9 @@
-const HitTablesTags =
+const ElementMenu =
     {
-        globalResults: 'w-ui-statistic-table',
-        matchedTextStats: 'w-ui-matched-text-stats-datagrid'
+        submenuShown: '[class="element-list collapse show"] li',
+        menuTitle: '.main-header'
 
     };
 
 
-module.exports = {HitTablesTags};
+module.exports = {ElementMenu};

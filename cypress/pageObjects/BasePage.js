@@ -1,54 +1,48 @@
-import HDWalletProvider from "@truffle/hdwallet-provider";
-import {ethers} from "ethers";
-
 export class BasePage {
 
-    static visitWithMockedWallet(page) {
-        cy.visit(page, {
-            onBeforeLoad: (win) => {
-                const hdwallet = new HDWalletProvider({
-                    privateKeys: ["4096b4d75e5351653841c31068644742c63f947382461748c2b7823ca971c237"],
-                    url: "https://rpc-endpoints.superfluid.dev/eth-goerli",
-                    chainId: 5,
-                    pollingInterval: 1000,
-                });
-                win.mockSigner = new ethers.providers.Web3Provider(hdwallet).getSigner();
-            }
-
-        })
-
-    }
-
-    static click(selector){
+    static click(selector) {
         cy.get(selector).click()
-     }
- 
-     static clickMultiple(selector){
-         cy.get(selector).click({ multiple:true })
-     }
-
-     static clickForce(selector){
-        cy.get(selector).click({ force:true })
     }
 
-    static verifyText(text){
-        cy.contains(text).should('be.visible')
+    static clickMultiple(selector) {
+        cy.get(selector).click({multiple: true})
     }
 
-    static clickOnButton(buttonTexk){
-        cy.get('button').contains(buttonTexk).click({force: true})
+    static type(selector, message) {
+        cy.get(selector).clear().type(message)
     }
 
-    static clickOnTexByTag(tag, text){
-        cy.get(tag).contains(text).click()
-    }
-      
-    static clickOnTex(text){
-        cy.contains(text).click({force: false})
+    static isVisible(selector) {
+        cy.get(selector).should("be.visible")
     }
 
-    static type(selector,message){
-        cy.get(selector).type(message)
+    static isNotVisible(selector) {
+        cy.get(selector).should("not.be.visible")
     }
+
+    static doesNotExist(selector) {
+        cy.get(selector).should("not.exist")
+    }
+
+    static visitPage(page) {
+        cy.visit(page, {failOnStatusCode: false})
+    }
+
+    static hasText(selector, text) {
+        cy.get(selector).should('have.text', text).and('be.visible')
+    }
+
+    static verifyUrl(url) {
+        cy.url().should("eq", Cypress.config("baseUrl") + url)
+    }
+
+    static arrayToHash(array) {
+        return array.map((val) => {
+            let temp = {};
+            temp[val[0]] = val[1];
+            return temp;
+        });
+    }
+
 }
 

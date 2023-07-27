@@ -10,7 +10,7 @@ describe('Test different feature of uitestingplayground', () => {
 
     it('Test Load Delays', () => {
         cy.visit('/')
-        cy.clickOnTextLink('LoAad Delay')
+        cy.clickOnTextLink('Load Delay')
         cy.get('[class="btn btn-primary"]', {timeout: 20000}).should('be.visible')
     })
 
@@ -35,14 +35,15 @@ describe('Test different feature of uitestingplayground', () => {
         })
     })
 
-    it.skip('Test AJAX Data', () => {
+    it('Test AJAX Data', () => {
         cy.visit('/ajax')
+        //Usage of alias
         cy.intercept('GET', '/ajaxdata').as("response")
 
         cy.get('#ajaxButton').click()
 
         cy.wait('@response', {timeout: 30000}).then(() => {
-            cy.get("#bg-success").should("have.text", "Data loaded with AJAX get request.")
+            cy.get(".bg-success").should("have.text", "Data loaded with AJAX get request.")
         })
     })
 
@@ -82,17 +83,17 @@ describe('Test different feature of uitestingplayground', () => {
 
             //Fin index for column where CPU is located, then find index for row where Chrome (or labeledText[0]) is located.
             cy.get('[role="rowgroup"]').eq(0).find('span').each(($row, rowIndex) => {
-                const t = $row.text();
+                const col = $row.text();
                 // matching criteria
-                if (t.includes('CPU')) {
+                if (col.includes('CPU')) {
                     cy.get('[role="rowgroup"]').eq(1).find('[role="row"] [role="cell"]:nth-child(1)').each(($cell, colIndex) => {
                         const cellText = $cell.text();
                         // matching criteria
                         if (cellText === labeledText[0]) {
                             // The index (rowIndex, colIndex) is found!
                             // We are increment by one because first index in nth-child starts from 1
-                            const element = `:nth-child(3) > :nth-child(${colIndex + 1}) > :nth-child(${rowIndex + 1})`
-                            cy.get(element).should('have.text', labeledText[2])
+                            const cpuValueEl = `:nth-child(3) > :nth-child(${colIndex + 1}) > :nth-child(${rowIndex + 1})`
+                            cy.get(cpuValueEl).should('have.text', labeledText[2])
                         }
                     })
                 }
